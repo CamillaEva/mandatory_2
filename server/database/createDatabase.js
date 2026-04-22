@@ -1,14 +1,12 @@
-import db from './connection.js'
+import db from './connection.js';
 import { hashedPassword } from '../util/passwordHashing.js';
-
 
 const deleteMode = process.argv.includes('--delete');
 
-if(deleteMode) {
-    await db.exec(`DROP TABLE IF EXISTS users;`);
-    await db.exec(`DROP TABLE IF EXISTS favorite_pokemon;`);
+if (deleteMode) {
+  await db.exec('DROP TABLE IF EXISTS users;');
+  await db.exec('DROP TABLE IF EXISTS favorite_pokemon;');
 }
-
 
 await db.exec(`
 CREATE TABLE IF NOT EXISTS users(
@@ -26,36 +24,30 @@ CREATE TABLE IF NOT EXISTS favorite_pokemon(
 
 `);
 
-
-
-
 if (deleteMode) {
-  
+  const password = await hashedPassword(process.env.SECRET_PASSWORD);
 
-const password = await hashedPassword('1234');
+  await db.run('INSERT INTO users VALUES (?, ?, ? );', ['cami', 'cami.the.developer@gmail.com', password]);
 
-await db.run(`INSERT INTO users VALUES (?, ?, ? );`, ['cami', 'cami.the.developer@gmail.com', password]);
+  await db.run('INSERT INTO users VALUES (?, ?, ? );', ['mads', 'cami.the.developer@gmail.com', password]);
 
-await db.run(`INSERT INTO users VALUES (?, ?, ? );`, ['mads', 'cami.the.developer@gmail.com', password]);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'cami\', \'raichu\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('cami', 'raichu');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'cami\', \'skitty\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('cami', 'skitty');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'cami\', \'raikou\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('cami', 'raikou');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'cami\', \'mew\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('cami', 'mew');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'cami\', \'espeon\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('cami', 'espeon');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'mads\', \'charizard\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('mads', 'charizard');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'mads\', \'eevee\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('mads', 'eevee');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'mads\', \'psyduck\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('mads', 'psyduck');`);
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'mads\', \'onix\');');
 
-await db.run(`INSERT INTO favorite_pokemon VALUES ('mads', 'onix');`);
-
-await db.run(`INSERT INTO favorite_pokemon VALUES ('mads', 'nidoking');`);
-
+  await db.run('INSERT INTO favorite_pokemon VALUES (\'mads\', \'nidoking\');');
 }

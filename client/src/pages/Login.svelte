@@ -16,7 +16,7 @@
             toastr.info("login succeeded!");
             setTimeout(() => {
                 window.location.href = "/dashboard";
-            }, 2000);
+            }, 1000);
         } else {
             toastr.warning("error logging in to site.");
         }

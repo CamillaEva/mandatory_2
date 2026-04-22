@@ -30,15 +30,16 @@
             <Link to="/dashboard">
                 <img src="/images/pokedexi.png" height="30px" alt="dashboard-button"/>
             </Link>
-        {/if}
-
-            <Link to="/about">
+                <Link to="/about">
                 <img src="/images/about.png" height="30px" alt="About-button" />
             </Link>
 
             <Link to="/contact">
                 <img src="/images/contact.png" height="30px" alt="Contact-button" />
             </Link>
+        {/if}
+
+
 
         </nav>
 
