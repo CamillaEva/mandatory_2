@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS favorite_pokemon(
 `);
 
 if (deleteMode) {
-  const password = await hashedPassword(process.env.SECRET_PASSWORD);
+  const password = await hashedPassword('1234');
 
   await db.run('INSERT INTO users VALUES (?, ?, ? );', ['cami', 'cami.the.developer@gmail.com', password]);
 
